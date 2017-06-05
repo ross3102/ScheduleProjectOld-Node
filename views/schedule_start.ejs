@@ -1,0 +1,53 @@
+<% include header.ejs %>
+<link rel="stylesheet" href="/css/schedule.css">
+<%
+    function pad (str, max) {
+        str = str.toString();
+        return str.length < max ? pad("0" + str, max) : str;
+    }
+
+    var updateTimes = () => {
+        
+        console.log("cool")
+        var time = new Date();
+        var hours = time.getHours();
+        var minutes = time.getMinutes();
+        var content = ''
+        schedule.items.forEach((item) => {
+            var itemDuration = item.duration.split(":");
+
+            hours = (hours + parseInt(itemDuration[0]));
+            minutes = (parseInt(minutes) + parseInt(itemDuration[1]));
+
+            if (minutes > 60) {
+                minutes -= 60;
+                hours++; 
+            }
+
+            minutes = pad(minutes, 2);
+
+            content += `<tr><td>${item.title}</td><td class="right aligned collapsing">${hours % 12}:${minutes}</td></tr>`
+        });
+        return content;
+    }
+
+%>
+
+<div id=container>
+    
+    <div class=cancel></div>
+
+    <table class="ui celled striped table">
+        <thead>
+            <tr><th class=itemname>Item Name</th><th class="right aligned collapsing">Finish By</th></tr>
+        </thead>
+
+        <tbody id="tableBody">
+            <% setInterval(() => {
+                var content = updateTimes();
+                document.getElementById("tableBody").innerHTML = content;
+            }, 1000); %>
+        </tbody>
+    </table>
+    
+</div>

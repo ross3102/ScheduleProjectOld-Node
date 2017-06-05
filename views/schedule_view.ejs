@@ -1,0 +1,28 @@
+<% include header.ejs %>
+
+<link rel="stylesheet" href="/css/schedule.css">
+
+<title>Schedule</title>
+
+<div id=container>
+
+    <table class="ui celled striped table">
+        <thead>
+            <tr>
+                <th colspan=2 id=title><%= schedule.title %> <a href="/schedule/<%= id %>/start"><div id=go>Start</div></a></th>
+            </tr>
+            <tr>
+                <th class=itemname>Item Name</th>
+                <th class="right aligned collapsing">Item Duration</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% schedule.items.forEach((item) => { %>
+                <tr>
+                    <td><%= item.title %></td><td class="right aligned collapsing"><%= item.duration %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
