@@ -1,2 +1,29 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
 <link rel="stylesheet" href="/css/Semantic-UI-CSS-master/semantic.min.css">
+
+<script>
+    var getTimes = (schedule) => {
+        var time = new Date();
+        var hours = time.getHours();
+        var minutes = time.getMinutes();
+
+        var times = [];
+
+        schedule.items.forEach((item) => {
+            var itemDuration = item.duration.split(":");
+
+            hours = (hours + parseInt(itemDuration[0]));
+            minutes = (parseInt(minutes) + parseInt(itemDuration[1]));
+
+            if (minutes >= 60) {
+                minutes -= 60;
+                hours++;
+            }
+
+            minutes = pad(minutes, 2);
+            times.push([item.title, hours % 12 + ":" + minutes]);
+            minutes = parseInt(minutes) + 5;
+        });
+        return times;
+    }
+</script>

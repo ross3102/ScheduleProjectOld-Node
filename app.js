@@ -38,7 +38,13 @@ app.get("/schedule/:id/view", (req, res) => {
 app.get("/schedule/:id/start", (req, res) => {
     var id = req.params["id"];
     var schedule = scheduleTest;
-    res.render("schedule_start", {schedule: schedule, id:id})
+    res.render("schedule_start", {schedule: schedule, id:id});
+});
+
+app.get("/schedule/:id/go", (req, res) => {
+    var id = req.params["id"];
+    var schedule = scheduleTest;
+    res.render("schedule_go", {schedule: schedule, id:id});
 });
 
 app.listen(port, () => {

@@ -6,6 +6,8 @@
     <a href="/schedule/<%= id %>/view"><div class="button cancel">Cancel</div></a>
     
     <a href="/schedule/<%= id %>/go"><div class="button go">Confirm</div></a>
+    
+    <div id=timer></div>
 
     <table class="ui celled striped table">
         <thead>
@@ -43,9 +45,12 @@
     var wait = () => {
         updateTimes();
         document.getElementById("tableBody").innerHTML = content;
+        secs--;
+        document.getElementById("timer").innerHTML = secs + "s"
         setTimeout(wait, 1000);
     }
-    
+
+var secs = 100;
 updateTimes();
 document.getElementById("tableBody").innerHTML = content;
 wait();

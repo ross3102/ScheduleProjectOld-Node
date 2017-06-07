@@ -4,7 +4,7 @@ body * {
 
 #container {
     width: 45%;
-    margin: 0 auto;
+    margin: 10px auto;
 }
 
 table {
@@ -20,30 +20,43 @@ table {
     padding-bottom: 5px;
 }
 
-#top {
-    margin-top: 10px;
-}
-
-#go {
-    float: right;
-    width: 30%;
-    max-width: 175px;
+.button {
     border-radius: 5px;
-    background-color: green;
     text-align: center;
-    margin-right: 10px;
     box-shadow: 1px 1px 3px black;
     height: 30px;
     line-height: 30px;
     font-size: 30px;
     color: white;
+    margin-bottom: 10px;
+    width: 30%;
+    max-width: 175px;
+    font-weight: bold;
 }
 
-a, a:hover {
-    color: black;
+.button:active {
+    box-shadow: none;
+}
+
+.go {
+    float: right;
+    background-color: green;
+    margin-right: 10px;
+}
+
+.cancel {
+    float: left;
+    background-color: red;
 }
 
 #go:active {
     background-color: darkgreen;
-    box-shadow: none;
+}
+
+#timer {
+    width: 200px;
+    height: 100px;
+    background-color: green;
+    clear: both;
+    font-size: 20px;
 }
