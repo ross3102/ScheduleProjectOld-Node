@@ -26,32 +26,44 @@
 
 <script>
     
-    var content = "";
-
-    function pad (str, max) {
-        str = str.toString();
-        return str.length < max ? pad("0" + str, max) : str;
-    }
-    
     var updateTimes = () => {
-        content = "";
+        var content = "";
         var schedule = <%- JSON.stringify(schedule) %>
         times = getTimes(schedule);
         for (var i=0; i<times.length; i++) {
             content += `<tr><td>${times[i][0]}</td><td class="right aligned collapsing">${times[i][1]}</td></tr>`;
         }
+        return content;
     }
 
     var wait = () => {
-        updateTimes();
-        document.getElementById("tableBody").innerHTML = content;
-        secs--;
-        document.getElementById("timer").innerHTML = secs + "s"
+        timerSeconds--;
+        if (timerSeconds < 0) {
+            timerSeconds = 59;
+            timerMinutes--;
+        }
+        if (timerMinutes < 0) {
+            timerMinutes = 59;
+            timerHours--;
+        }
+        if (timerHours < 0) {
+            timerSeconds = 0;
+            timerMinutes = 0;
+            timerHours = 0;
+            document.getElementById("timer").innerHTML = `00:00:00`;
+            return;
+        }
+        document.getElementById("timer").innerHTML = `${pad(timerHours)}:${pad(timerMinutes)}:${pad(timerSeconds)}`;
         setTimeout(wait, 1000);
     }
 
-var secs = 100;
-updateTimes();
+var items = <%- JSON.stringify(schedule.items) %>;
+var itemIndex = 0;
+var currentItem = items[itemIndex];
+var timerHours = currentItem.duration.split(":")[0];
+var timerMinutes = currentItem.duration.split(":")[1];
+var timerSeconds = 0;
+var content = updateTimes();
 document.getElementById("tableBody").innerHTML = content;
 wait();
     

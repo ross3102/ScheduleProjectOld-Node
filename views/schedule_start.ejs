@@ -24,30 +24,22 @@
 
 <script>
     
-    var content = "";
-
-    function pad (str, max) {
-        str = str.toString();
-        return str.length < max ? pad("0" + str, max) : str;
-    }
-    
     var updateTimes = () => {
-        content = "";
+        var content = "";
         var schedule = <%- JSON.stringify(schedule) %>
         times = getTimes(schedule);
         for (var i=0; i<times.length; i++) {
             content += `<tr><td>${times[i][0]}</td><td class="right aligned collapsing">${times[i][1]}</td></tr>`;
         }
+        return content;
     }
 
     var wait = () => {
-        updateTimes();
+        var content = updateTimes();
         document.getElementById("tableBody").innerHTML = content;
         setTimeout(wait, 1000);
     }
-    
-updateTimes();
-document.getElementById("tableBody").innerHTML = content;
+
 wait();
     
 </script>
