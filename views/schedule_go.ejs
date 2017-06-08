@@ -34,7 +34,11 @@
             content += `<tr><td>${times[i][0]}</td><td class="right aligned collapsing">${times[i][1]}</td></tr>`;
         }
         return content;
-    }
+    };
+    
+    var nextAssignment = () => {
+        
+    };
 
     var wait = () => {
         timerSeconds--;
@@ -51,7 +55,7 @@
             timerMinutes = 0;
             timerHours = 0;
             document.getElementById("timer").innerHTML = `00:00:00`;
-            return;
+            nextAssignment();
         }
         document.getElementById("timer").innerHTML = `${pad(timerHours, 2)}:${pad(timerMinutes, 2)}:${pad(timerSeconds, 2)}`;
         setTimeout(wait, 1000);
