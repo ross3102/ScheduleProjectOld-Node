@@ -53,7 +53,7 @@
             document.getElementById("timer").innerHTML = `00:00:00`;
             return;
         }
-        document.getElementById("timer").innerHTML = `${pad(timerHours)}:${pad(timerMinutes)}:${pad(timerSeconds)}`;
+        document.getElementById("timer").innerHTML = `${pad(timerHours, 2)}:${pad(timerMinutes, 2)}:${pad(timerSeconds, 2)}`;
         setTimeout(wait, 1000);
     }
 
